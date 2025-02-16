@@ -93,8 +93,12 @@ vec3 render(vec3 ro, vec3 rd) {
 
 void main() {
     vec2 uv = gl_FragCoord.xy / u_resolution.xy;
+    vec2 screen = uv * 2.0 - 1.0;
+    float aspect = u_resolution.x / u_resolution.y;
+    screen.x *= aspect;
+
     vec3 ro = vec3(0.0, 0.0, -3.0);
-    vec3 rd = normalize(vec3(uv * 2.0 - 1.0, 1.0));
+    vec3 rd = normalize(vec3(screen, 1.0));
 
     vec3 color = render(ro, rd);
 
